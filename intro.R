@@ -393,3 +393,162 @@ aggregate(Radiation ~ rainy, data = aranjuez, FUN = mean)
 aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
 
 aggregate(Radiation ~ tempClass, data = aranjuez, FUN = mean)
+
+aggregate(Radiation ~ tempClass + rainy, data = aranjuez, FUN = mean)
+
+## Fechas
+## - =as.Date=
+
+  aranjuez$date <- as.Date(aranjuez[,1],
+                      format='%Y-%m-%d')
+
+## - Funciones para extraer mes y año
+
+  Year <- function(x)as.numeric(format(x, "%Y"))
+  Month <- function(x)as.numeric(format(x, "%m"))
+
+## - Añado columnas en =data.frame=
+
+aranjuez$month <- Month(aranjuez$date)
+aranjuez$year <- Year(aranjuez$date)
+aranjuez$quarter <- quarters(aranjuez$date)
+
+## Agregamos con fechas
+
+  aggregate(Radiation ~ year, data = aranjuez, FUN=mean)
+
+  aggregate(Radiation ~ month + year, data = aranjuez, FUN=mean)
+
+aggregate(cbind(Radiation, TempAvg) ~ year, data = aranjuez, FUN = mean)
+
+aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
+
+## Lattice
+
+## - Documentación: [[http://lmdvr.r-forge.r-project.org/figures/figures.html][Código y Figuras del libro]]
+
+  library(lattice)
+
+## =xyplot=
+
+pdf(file="figs/xyplot.pdf")
+  xyplot(Radiation ~ TempAvg, data=aranjuez)
+dev.off()
+
+## Añadimos regresión lineal
+
+pdf(file="figs/xyplotPRG.pdf")
+  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c('p', 'r'), grid = TRUE,
+         lwd=2, col.line='black')
+  
+dev.off()
+
+## Añadimos ajuste local
+
+pdf(file="figs/xyplotSmooth.pdf")
+  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c('p', 'smooth'), grid = TRUE,
+         lwd=2, col.line='black')
+dev.off()
+
+## Paneles
+
+pdf(file="figs/xyplotYear.pdf")
+  xyplot(Radiation ~ TempAvg|factor(year),
+         data=aranjuez)
+dev.off()
+
+## Grupos
+
+pdf(file="figs/xyplotQuarter.pdf")
+  xyplot(Radiation ~ TempAvg, groups=quarter,
+         data=aranjuez, auto.key=list(space='right'))
+dev.off()
+
+## Colores y tamaños
+
+pdf(file="figs/xyplotColors.pdf")
+  xyplot(Radiation ~ TempAvg,
+         type=c('p', 'r'),
+         cex=2, col='blue',
+         alpha=.5, pch=19,
+         lwd=3, col.line='black',
+         data=aranjuez)
+dev.off()
+
+## Colores con grupos: =par.settings= y =simpleTheme=
+## - Primero definimos el tema con =simpleTheme=
+
+  myTheme <- simpleTheme(col=c('red', 'blue',
+                          'green', 'yellow'),
+                          pch=19, alpha=.6)
+
+## Colores con grupos: =par.settings= y =simpleTheme=
+## - Aplicamos el resultado en =par.settings=
+
+pdf(file="figs/myTheme.pdf")
+  xyplot(Radiation ~ TempAvg,
+         groups=quarter,
+         par.settings=myTheme,
+         auto.key=list(space='right'),
+         data=aranjuez)
+dev.off()
+
+## Colores: brewer.pal
+
+library(RColorBrewer)
+
+myPal <- brewer.pal(n = 4, 'Dark2')
+
+myTheme <- simpleTheme(col = myPal,
+                       pch=19, alpha=.6)
+
+## Asignamos paleta con =par.settings=
+
+pdf(file="figs/brewer.pdf")
+xyplot(Radiation ~ TempAvg,
+       groups=quarter,
+       par.settings=myTheme,
+       auto.key=list(space='right'),
+       data=aranjuez)
+dev.off()
+
+## Matriz de gráficos de dispersión
+
+png(filename="figs/splom.png")
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+dev.off()
+
+## Matriz de gráficos de dispersión
+
+png(filename="figs/splomGroup.png")
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        groups=aranjuez$quarter,
+        auto.key=list(space='right'),
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+dev.off()
+
+## Box-and-Whiskers
+
+pdf(file="figs/bwplot.pdf")
+  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=FALSE, pch='|')
+dev.off()
+
+## Histogramas
+
+pdf(file="figs/histogram.pdf")
+  histogram(~ Radiation|factor(year), data=aranjuez)
+dev.off()
+
+## Gráficos de densidad
+
+pdf(file="figs/density.pdf")
+densityplot(~ Radiation, groups=quarter,
+            data=aranjuez,
+            auto.key=list(space='right'))
+dev.off()
