@@ -1,0 +1,31 @@
+* Introducción a R (EOI, programas de Big Data)
+
+Documentación para cursos introductorios a R en la EOI (programas de Big Data)
+
+Este material ha sido elaborado por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre [[http://www.gnu.org/software/emacs/][Emacs]]. Es una versión reducida y adaptada de [[https://oscarperpinan.github.io/intro][este otro curso más amplio]].
+
+[[http://creativecommons.org/licenses/by-sa/4.0/][https://i.creativecommons.org/l/by-sa/4.0/88x31.png]] Este material está bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons CC-BY-SA 4.0]].
+
+* Cómo usar el material
+
+Todo el material está disponible en este [[https://github.com/oscarperpinan/r-intro-eoi][repositorio]]. Consta de una presentación, código R, y datos de ejemplo. La presentación se puede leer en formato [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.pdf?raw%3Dtrue][PDF]], [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.org][org-mode]], o [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.tex][LaTeX]]. El código R está disponible [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.R][aquí]]. El fichero de datos está [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/data/aranjuez.csv][aquí]]. 
+
+Para trabajar con este material es recomendable obtener una copia local del repositorio en formato [[https://github.com/oscarperpinan/r-intro-eoi/archive/master.zip][ZIP]]. Es recomendable descomprimirlo en una ruta sencilla (por ejemplo, en Windows =C:\cursoR\= y en Linux/Mac =/home/miusuario/cursoR/=). 
+
+Si tienes  [[http://git-scm.com/][=git=]] en tu ordenador, puedes hacer una copia de forma aún más sencilla:
+
+#+BEGIN_SRC bash
+  git clone git://github.com/oscarperpinan/r-intro-eoi.git
+#+END_SRC
+
+Una vez realizado cualquiera de los pasos anteriores, existirá una carpeta en tu ordenador con el contenido del curso. Todo el código asume que la ruta de trabajo coincide con esa carpeta. Por tanto, el primer paso a dar en =R= es definir la ruta de trabajo con =setwd=: 
+#+begin_src R
+setwd('/ruta/de/copia/local/del/repositorio/')
+#+end_src
+Puedes comprobar que todo ha ido bien con =dir=. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
+#+begin_src R
+dir()
+#+end_src
+
+A partir de aquí puedes abrir el [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.R][fichero de código R]] y trabajar con él con tu interfaz de R favorita.
+
