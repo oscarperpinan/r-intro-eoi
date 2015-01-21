@@ -1,4 +1,4 @@
-* Introducción a R (EOI, programas de Big Data)
+* <<r-intro-eoi>>Introducción a R (EOI, programas de Big Data)
 
 Documentación para cursos introductorios a R en la EOI (programas de Big Data)
 
