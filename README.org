@@ -8,7 +8,7 @@ Este material ha sido elaborado por [[http://oscarperpinan.github.io][Oscar Perp
 
 * Cómo usar el material
 
-Todo el material está disponible en este [[https://github.com/oscarperpinan/r-intro-eoi][repositorio]]. Consta de una presentación, código R, y datos de ejemplo. La presentación se puede leer en formato [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.pdf?raw%3Dtrue][PDF]], [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.org][org-mode]], o [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.tex][LaTeX]]. El código R está disponible [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.R][aquí]]. El fichero de datos está [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/data/aranjuez.csv][aquí]]. 
+Todo el material está disponible en este [[https://github.com/oscarperpinan/r-intro-eoi][repositorio]]. Consta de una presentación, código R, y datos de ejemplo. La presentación se puede leer en formato [[https://github.com/oscarperpinan/r-intro-eoi/raw/master/intro.pdf][PDF]], [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.org][org-mode]], o [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/intro.tex][LaTeX]]. El código R está disponible [[https://github.com/oscarperpinan/r-intro-eoi/raw/master/intro.R][aquí]]. El fichero de datos está [[https://github.com/oscarperpinan/r-intro-eoi/blob/master/data/aranjuez.csv][aquí]]. 
 
 Para trabajar con este material es recomendable obtener una copia local del repositorio en formato [[https://github.com/oscarperpinan/r-intro-eoi/archive/master.zip][ZIP]]. Es recomendable descomprimirlo en una ruta sencilla (por ejemplo, en Windows =C:\cursoR\= y en Linux/Mac =/home/miusuario/cursoR/=). 
 
