@@ -678,12 +678,6 @@ apply(M, 1, foo)
 *** Lectura de datos con =read.table=
 #+begin_src R
   
-  dats <- read.table('data/aranjuez.csv', sep=',')
-  head(dats)
-#+end_src
-*** Lectura de datos con =read.table=
-#+begin_src R
-  
   dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
   head(dats)
 #+end_src
@@ -700,6 +694,33 @@ apply(M, 1, foo)
 
 #+begin_src R
   names(aranjuez)
+#+end_src
+
+** Indexado
+
+*** Indexado con =[]=
+- Filas
+#+begin_src R
+aranjuez[1:5,]
+#+end_src
+- Filas y Columnas
+#+begin_src R
+aranjuez[10:14, 1:5]
+#+end_src
+
+*** Indexado con =[]=
+- Condición basada en los datos
+#+begin_src R
+idx <- with(aranjuez, Radiation > 20 & TempAvg < 10) 
+
+head(aranjuez[idx, ])
+#+end_src
+
+*** =subset=
+#+begin_src R
+subset(aranjuez,
+       subset = (Radiation > 20 & TempAvg < 10),
+       select = c(Radiation, TempAvg, TempMax, TempMin))
 #+end_src
 
 ** Datos agregados
