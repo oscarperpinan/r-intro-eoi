@@ -15,7 +15,7 @@
 #+startup: beamer
 #+LaTeX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+BEAMER_THEME: Goettingen
+#+BEAMER_THEME: Goettingen [hideothersubsections]
 #+BEAMER_COLOR_THEME: rose
 #+BEAMER_FONT_THEME: serif
 #+LATEX_HEADER: \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
