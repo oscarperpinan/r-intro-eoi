@@ -96,13 +96,27 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
   packageDescription('data.table')
 #+end_src
 
-* Vectores y Matrices
+* Objetos en R
 
-** Vectores 
+*** Objetos en R
+
+- Existen varios objetos en R:
+  - Vectores
+  - Listas
+  - Funciones
+  - ...
+- A partir de estos objetos se definen varias clases:
+  - =matrix=
+  - =data.frame=
+  - =factor=
+  - =Date=, =POSIXct=
+  - ...
+
+** Vectores
 
 *** Primeros pasos
 #+begin_src R 
-x <- 1
+x <- 1:5
 x
 #+end_src
 #+begin_src R
@@ -112,43 +126,6 @@ length(x)
 class(x)
 #+end_src
 
-#+begin_src R
-x <- c(1, 2, 3)
-x
-#+end_src
-
-*** Operaciones sencillas con vectores
-#+begin_src R 
-  x + 1
-#+end_src
-#+begin_src R
-  y <- 1:10
-  x + y
-#+end_src
-#+begin_src R
-  x * y
-#+end_src
-#+begin_src R
-  x^2
-#+end_src
-#+begin_src R
-  x^2 + y^3
-#+end_src
-
-*** ¿Y qué hago cuando necesito ayuda?
-
-#+begin_src R
-  exp(x)
-#+end_src
-
-#+begin_src R
-  log(x)
-#+end_src
-
-#+begin_src R :eval no
-help(exp)
-help(log)
-#+end_src
 
 *** Generar vectores con =seq=
 #+begin_src R 
@@ -162,6 +139,11 @@ seq(1, 100, length=10)
 
 
 *** Unir vectores con =c=
+#+begin_src R
+x <- c(1, 2, 3)
+x
+#+end_src
+
 #+begin_src R 
 x <- seq(1, 100, length=10)
 y <- seq(2, 100, length=50)
@@ -169,125 +151,28 @@ z <- c(x, y)
 z
 #+end_src
 
-#+begin_src R
-z + c(1, 2)
-#+end_src
 
-#+begin_src R
-z + c(1, 2, 3, 4, 5, 6, 7)
-#+end_src
-
-
-*** Indexado numérico de vectores
-
+*** Operaciones sencillas con vectores
 #+begin_src R 
-  x <- seq(1, 100, 2)
-  x[c(1, 2, 3, 4, 5)]
+  x <- 1:5
+  x + 1
 #+end_src
 
 #+begin_src R
-  x[1:5]
+  x^2
 #+end_src
 
 #+begin_src R
-  x[10:5]
-#+end_src
-
-*** Indexado de vectores con condiciones lógicas
-#+begin_src R 
-  condicion <- (x>30)
-  condicion
+  y <- 1:10
+  x + y
 #+end_src
 
 #+begin_src R
-  class(condicion)
-#+end_src
-
-*** Indexado de vectores con condiciones lógicas
-
-#+begin_src R 
-  x == 37
+  x * y
 #+end_src
 
 #+begin_src R
-  x[x == 37]
-#+end_src
-
-#+begin_src R
-  x[x != 9]
-#+end_src
-
-#+begin_src R
-  x[x > 20]
-#+end_src
-     
-*** Indexado de vectores con =%in%=
-#+begin_src R 
-y <- seq(101, 200, 2)
-y %in% c(101, 127, 141)
-#+end_src
-
-#+begin_src R
-y[y %in% c(101, 127, 141)]
-#+end_src
-
-*** Indexado de vectores con condiciones múltiples
-
-#+begin_src R 
-z <- c(x, y)
-#+end_src
-
-#+begin_src R
-z[z < 30 | z > 150]
-#+end_src
-
-#+begin_src R
-z[z >= 30 & z <= 150]
-#+end_src
-
-*** Indexado de vectores con condiciones múltiples
-#+begin_src R 
-cond  <-  (x>10) & (x<50)
-cond
-#+end_src
-
-#+begin_src R
-cond  <-  (x>=10) & (x<=50)
-cond
-#+end_src
-
-#+begin_src R
-x[cond]
-#+end_src
-
-*** Con las condiciones se pueden hacer operaciones
-#+begin_src R 
-sum(cond)
-#+end_src
-
-#+begin_src R
-!cond
-#+end_src
-
-#+begin_src R
-sum(!cond)
-#+end_src
-
-#+begin_src R
-as.numeric(cond)
-#+end_src
-    
-
-*** Funciones predefinidas
-#+begin_src R :eval no
-summary(x)
-mean(x)
-sd(x)
-median(x)
-max(x)
-min(x)
-range(x)
-quantile(x)
+  x^2 + y^3
 #+end_src
 
 
@@ -325,31 +210,142 @@ M <- rbind(x, y, z)
 M
 #+end_src
 
-*** Transponer una matriz
+
+
+** Listas
+*** Para crear una lista usamos la función =list=
+#+begin_src R 
+lista <- list(a=c(1,3,5),
+              b=c('l', 'p', 'r', 's'),
+              c=3)
+lista
+#+end_src
+
+#+begin_src R
+class(lista)
+#+end_src
+
+#+begin_src R
+length(lista)
+#+end_src
+
+
+
+** Data.frame
+*** Para crear un =data.frame=...
+#+begin_src R 
+  df <- data.frame(x = 1:5,
+                   y = rnorm(10),
+                   z = 0)
+  df
+#+end_src
+
+#+begin_src R
+  length(df)
+#+end_src
+
+#+begin_src R
+  dim(df)
+#+end_src
+
+** Funciones
+
+*** Para definir una función usamos la función =function=
+#+begin_src R 
+myFun <- function(x, y) x + y
+myFun
+#+end_src
+
+#+begin_src R
+  class(myFun)
+#+end_src
+
+
+#+begin_src R
+  myFun(3, 4)
+#+end_src
+
+*** Podemos construir a partir de funciones
+#+begin_src R 
+foo  <-  function(x, ...){
+  mx <- mean(x, ...)
+  medx <- median(x, ...)
+  sdx <- sd(x, ...)
+  c(mx, medx, sdx)
+  }
+#+end_src
+O en forma resumida:
+#+begin_src R 
+foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
+#+end_src
+
+
+*** Y ahora usamos la función con vectores
+#+begin_src R 
+foo(1:10)
+#+end_src
+
+#+begin_src R
+foo(rnorm(1e5))
+#+end_src
+
+* Indexado
+** Vectores
+*** Indexado numérico
 
 #+begin_src R 
-t(M)
+  x <- seq(1, 100, 2)
+  x
 #+end_src
-
 
 #+begin_src R
-dim(t(M))
+  x[1:5]
 #+end_src
 
+#+begin_src R
+  x[10:5]
+#+end_src
 
-*** Indexado de matrices
+*** Indexado con condiciones lógicas
+
 #+begin_src R 
-M[]
+  x == 37
 #+end_src
 
 #+begin_src R
-M[1, ]
+  x[x == 37]
 #+end_src
 
 #+begin_src R
-M[, 1]
+  x[x != 9]
 #+end_src
 
+#+begin_src R
+  x[x > 20]
+#+end_src
+     
+
+*** Indexado con condiciones múltiples
+
+#+begin_src R 
+z <- seq(-10, 10, by = .5)
+z
+#+end_src
+
+#+begin_src R
+z[z < -5 | z > 5]
+#+end_src
+
+#+begin_src R
+cond <- (z >= 0 & z <= 5)
+cond
+#+end_src
+
+#+begin_src R
+z[cond]
+#+end_src
+
+** Matrices
 *** Indexado de matrices
 #+begin_src R
 M[1:2, ]
@@ -372,100 +368,14 @@ M[-1,]
 M[-c(1, 2),]
 #+end_src
 
-*** Operaciones con matrices
-
-#+begin_src R 
-M * M
-#+end_src
-
-#+begin_src R
-M ^ 2
-#+end_src
-
-#+begin_src R
-M %*% M
-#+end_src
-
-#+begin_src R
-M %*% t(M)
-#+end_src
-
-*** Operaciones con matrices: funciones predefinidas
-
-#+begin_src R 
-sum(M)
-#+end_src
-
-#+begin_src R
-rowSums(M)
-#+end_src
-
-#+begin_src R
-colSums(M)
-#+end_src
-
-#+begin_src R
-rowMeans(M)
-#+end_src
-
-#+begin_src R
-colMeans(M)
-#+end_src
-
-*** La función =apply=
-#+begin_src R 
-apply(M, 1, sum)
-#+end_src
-
-#+begin_src R
-apply(M, 2, sum)
-#+end_src
-
-#+begin_src R
-apply(M, 1, mean)
-#+end_src
-
-#+begin_src R
-apply(M, 2, mean)
-#+end_src
-
-#+begin_src R
-apply(M, 1, sd, na.rm=TRUE)
-#+end_src
-
-#+begin_src R
-apply(M, 2, sd)
-#+end_src
-
-
-* Listas y data.frame
 
 ** Listas
-*** Para crear una lista usamos la función =list=
-#+begin_src R 
-  lista <- list(a=c(1,3,5),
-                b=c('l', 'p', 'r', 's'),
-                c=3)
-#+end_src
-
 *** Podemos acceder a los elementos...
 - Por su nombre
-#+begin_src R 
-lista
-#+end_src
-
 #+begin_src R
 lista$a
 #+end_src
 
-#+begin_src R
-lista$b
-#+end_src
-
-#+begin_src R
-lista$c
-#+end_src
-*** Podemos acceder a los elementos...
 - o por su índice
 #+begin_src R 
   lista[1]
@@ -475,16 +385,44 @@ lista$c
   lista[[1]]
 #+end_src
 
-#+begin_src R
-  
-  class(lista[1])
+** Data Frame
+*** Podemos acceder a los elementos
+- Por su nombre (como una lista)
+#+begin_src R 
+df$x
+#+end_src
+
+- Por su índice (como una matriz)
+#+begin_src R 
+df[1,]
 #+end_src
 
 #+begin_src R
-  class(lista[[1]])
+df[,1]
 #+end_src
 
-*** Para matrices =apply=, para listas =lapply= y =sapply=
+* Bucles
+
+** Matrices
+*** La función =apply=
+#+begin_src R 
+apply(M, 1, sum)
+#+end_src
+
+#+begin_src R
+rowSums(M)
+#+end_src
+
+#+begin_src R
+apply(M, 2, mean)
+#+end_src
+
+#+begin_src R
+colMeans(M)
+#+end_src
+
+** Listas / =data.frame=
+*** =lapply= y =sapply=
 #+begin_src R
 lista <- list(x = 1:10,
               y = seq(0, 10, 2),
@@ -495,163 +433,6 @@ lapply(lista, sum)
 #+begin_src R
 sapply(lista, sum)
 #+end_src
-
-
-** Data.frame
-*** Para crear un =data.frame=...
-#+begin_src R 
-  df <- data.frame(x = 1:10,
-                   y = rnorm(10),
-                   z = 0)
-  df
-#+end_src
-
-#+begin_src R
-  length(df)
-#+end_src
-
-#+begin_src R
-  dim(df)
-#+end_src
-*** Podemos acceder a los elementos
-- Por su nombre
-#+begin_src R 
-df$x
-#+end_src
-
-#+begin_src R
-df$y
-#+end_src
-
-#+begin_src R
-df$z
-#+end_src
-
-- Por su índice
-#+begin_src R 
-df[1,]
-#+end_src
-
-#+begin_src R
-df[,1]
-#+end_src
-
-
-*** La regla del reciclaje
-#+begin_src R 
-  year <- 2011
-  month <- 1:12
-  class <- c('A', 'B', 'C')
-  vals <- rnorm(12)
-  
-  dats <- data.frame(year, month, class, vals)
-  dats
-#+end_src
-
-*** La función =expand.grid=
-
-#+begin_src R 
-  x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(x = x, y = y)
-  head(df)
-#+end_src
-
-#+begin_src R
-  tail(df)
-#+end_src
-
-#+begin_src R
-  summary(df)
-#+end_src
-
-# *** Unir dos =data.frame=
-# - Primero construimos un =data.frame= de ejemplo
-# #+begin_src R 
-#   USStates <- as.data.frame(state.x77)
-#   USStates$Name <- rownames(USStates)
-#   rownames(USStates) <- NULL
-# #+end_src
-# - Lo partimos en estados "fríos" y estados "grandes"
-# #+begin_src R 
-#   coldStates <- USStates[USStates$Frost>150,
-#                          c('Name', 'Frost')]
-#   largeStates <- USStates[USStates$Area>1e5,
-#                           c('Name', 'Area')]
-# #+end_src
-# - Unimos los dos conjuntos (estados "fríos" y "grandes")
-# #+begin_src R 
-#   merge(coldStates, largeStates)
-# #+end_src
-
-# *** =merge= usa =match=
-# - Estados grandes que también son fríos
-# #+begin_src R 
-#   idxLarge <- match(largeStates$Name,
-#                     coldStates$Name,
-#                     nomatch=0)
-#   idxLarge
-  
-#   coldStates[idxLarge,]
-# #+end_src
-
-# - Estados frios que también son grandes
-# #+begin_src R 
-#   idxCold <- match(coldStates$Name,
-#                    largeStates$Name,
-#                    nomatch=0)
-#   idxCold
-  
-#   largeStates[idxCold,]
-# #+end_src
-    
-
-* Funciones
-
-** Definición de funciones
-*** Para definir una función usamos la función =function=
-#+begin_src R 
-  myFun <- function(x, y) x + y
-  myFun(3, 4)
-#+end_src
-
-#+begin_src R
-  class(myFun)
-#+end_src
-
-*** Definir una función a partir de funciones
-#+begin_src R 
-foo  <-  function(x, ...){
-  mx <- mean(x, ...)
-  medx <- median(x, ...)
-  sdx <- sd(x, ...)
-  c(mx, medx, sdx)
-  }
-#+end_src
-O en forma resumida:
-#+begin_src R 
-foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
-#+end_src
-
-
-** Uso de funciones
-*** Y ahora usamos la función con vectores
-#+begin_src R 
-foo(1:10)
-#+end_src
-
-#+begin_src R
-foo(rnorm(1e5))
-#+end_src
-
-*** Y también funciona con matrices
-#+begin_src R 
-rowMeans(M)
-#+end_src
-
-#+begin_src R
-apply(M, 1, foo)
-#+end_src
-
 
 * Datos con R
 ** Lectura de datos
@@ -672,20 +453,14 @@ apply(M, 1, foo)
 
 *** Lectura de datos con =read.table=
 #+begin_src R
-  dats <- read.table('data/aranjuez.csv')
-  head(dats)
-#+end_src
-*** Lectura de datos con =read.table=
-#+begin_src R
   
   dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
   head(dats)
 #+end_src
 *** Lectura de datos con =read.table=
 #+begin_src R
-  
-  aranjuez <- read.csv('data/aranjuez.csv')
-  head(aranjuez)
+aranjuez <- read.csv('data/aranjuez.csv')
+head(aranjuez)
 #+end_src
 
 #+begin_src R
@@ -720,7 +495,8 @@ head(aranjuez[idx, ])
 #+begin_src R
 subset(aranjuez,
        subset = (Radiation > 20 & TempAvg < 10),
-       select = c(Radiation, TempAvg, TempMax, TempMin))
+       select = c(Radiation, TempAvg,
+           TempMax, TempMin))
 #+end_src
 
 ** Datos agregados
@@ -728,17 +504,20 @@ subset(aranjuez,
 #+begin_src R
 aranjuez$rainy <- aranjuez$Rain > 0
 
-aggregate(Radiation ~ rainy, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ rainy, data = aranjuez,
+          FUN = mean)
 #+end_src
 *** Variable categórica con =cut=
 #+begin_src R
 aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
 
-aggregate(Radiation ~ tempClass, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ tempClass, data = aranjuez,
+          FUN = mean)
 #+end_src
 
 #+begin_src R
-aggregate(Radiation ~ tempClass + rainy, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
 #+end_src
 
 *** Fechas
@@ -761,23 +540,46 @@ aranjuez$quarter <- quarters(aranjuez$date)
 #+end_src
 *** Agregamos con fechas
 #+begin_src R
-  aggregate(Radiation ~ year, data = aranjuez, FUN=mean)
+aggregate(Radiation ~ year, data = aranjuez,
+          FUN=mean)
 #+end_src
 
 #+begin_src R
-  aggregate(Radiation ~ month + year, data = aranjuez, FUN=mean)
+aggregate(Radiation ~ month + year,
+          data = aranjuez, FUN=mean)
 #+end_src
 
-#+begin_src R
-aggregate(cbind(Radiation, TempAvg) ~ year, data = aranjuez, FUN = mean)
-#+end_src
+*** Agregamos varias variables con fechas
 
 #+begin_src R
-aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
+aggregate(cbind(Radiation, TempAvg) ~ month + year,
+          data = aranjuez, FUN = mean)
+#+end_src
+** Regresión lineal
+
+*** =lm=: Regresión simple
+#+begin_src R
+radTemp <- lm(Radiation ~ TempAvg, data = aranjuez)
+summary(radTemp)
+#+end_src
+
+
+*** =lm=: Regresión multiple
+#+begin_src R
+radTempHumid <- lm(Radiation ~ TempAvg * HumidAvg,
+                   data = aranjuez)
+summary(radTempHumid)
+#+end_src
+
+*** =lm=: Regresión multiple
+#+begin_src R
+radTempRain <- lm(Radiation ~ TempAvg * rainy,
+                  data = aranjuez)
+summary(radTempRain)
 #+end_src
 
 * Visualización de datos 
-** Lattice
+** Catálogo
 
 *** Lattice
 
@@ -797,8 +599,76 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 #+RESULTS:
 [[file:figs/xyplot.pdf]]
 
+*** Paneles
+
+#+begin_src R :eval no :file figs/xyplotYear.pdf
+  xyplot(Radiation ~ TempAvg|factor(year),
+         data=aranjuez)
+#+end_src
+
+*** 
+#+RESULTS:
+[[file:figs/xyplotYear.pdf]]
+
+*** Grupos
+
+#+begin_src R :eval no :file figs/xyplotQuarter.pdf
+  xyplot(Radiation ~ TempAvg, groups=quarter,
+         data=aranjuez, auto.key=list(space='right'))
+#+end_src
+
+*** 
+#+RESULTS:
+[[file:figs/xyplotQuarter.pdf]]
+
+*** Matriz de gráficos de dispersión
+
+#+begin_src R :eval no :file figs/splom.png
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+#+end_src
+
+*** 
+#+RESULTS:
+[[file:figs/splom.png]]
+
+*** Box-and-Whiskers
+
+#+begin_src R :eval no :file figs/bwplot.pdf
+  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=FALSE, pch='|')
+#+end_src
+
+*** 
+#+RESULTS:
+[[file:figs/bwplot.pdf]]
+
+*** Histogramas
+
+#+begin_src R :eval no :file figs/histogram.pdf
+  histogram(~ Radiation|factor(year), data=aranjuez)
+#+end_src
+
+*** 
+#+RESULTS:
+[[file:figs/histogram.pdf]]
+
+*** Gráficos de densidad
+
+#+begin_src R :eval no :file figs/density.pdf
+densityplot(~ Radiation, groups=quarter,
+            data=aranjuez,
+            auto.key=list(space='right'))
+#+end_src
+
+*** 
+#+RESULTS:
+[[file:figs/density.pdf]]
+
     
 
+** Ajustes
 *** Añadimos regresión lineal
 
 #+begin_src R :eval no :file figs/xyplotPRG.pdf
@@ -826,28 +696,6 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 #+RESULTS:
 [[file:figs/xyplotSmooth.pdf]]
 
-
-*** Paneles
-
-#+begin_src R :eval no :file figs/xyplotYear.pdf
-  xyplot(Radiation ~ TempAvg|factor(year),
-         data=aranjuez)
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/xyplotYear.pdf]]
-
-*** Grupos
-
-#+begin_src R :eval no :file figs/xyplotQuarter.pdf
-  xyplot(Radiation ~ TempAvg, groups=quarter,
-         data=aranjuez, auto.key=list(space='right'))
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/xyplotQuarter.pdf]]
 
 *** Colores y tamaños
 #+begin_src R :eval no :file figs/xyplotColors.pdf
@@ -911,63 +759,4 @@ xyplot(Radiation ~ TempAvg,
 #+RESULTS:
 [[file:figs/brewer.pdf]]
 
-
-*** Matriz de gráficos de dispersión
-
-#+begin_src R :eval no :file figs/splom.png
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/splom.png]]
-
-*** Matriz de gráficos de dispersión
-
-#+begin_src R :eval no :file figs/splomGroup.png
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        groups=aranjuez$quarter,
-        auto.key=list(space='right'),
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/splomGroup.png]]
-
-*** Box-and-Whiskers
-
-#+begin_src R :eval no :file figs/bwplot.pdf
-  bwplot(Radiation ~ month, data=aranjuez,
-         horizontal=FALSE, pch='|')
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/bwplot.pdf]]
-
-*** Histogramas
-
-#+begin_src R :eval no :file figs/histogram.pdf
-  histogram(~ Radiation|factor(year), data=aranjuez)
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/histogram.pdf]]
-
-*** Gráficos de densidad
-
-#+begin_src R :eval no :file figs/density.pdf
-densityplot(~ Radiation, groups=quarter,
-            data=aranjuez,
-            auto.key=list(space='right'))
-#+end_src
-
-*** 
-#+RESULTS:
-[[file:figs/density.pdf]]
 

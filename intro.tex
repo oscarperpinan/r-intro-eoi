@@ -1,4 +1,4 @@
-% Created 2015-01-27 mar 10:21
+% Created 2015-01-29 jue 12:39
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -24,7 +24,7 @@
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-\usetheme{Goettingen}
+\usetheme[hideothersubsections]{Goettingen}
 \usecolortheme{rose}
 \usefonttheme{serif}
 \author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
@@ -141,8 +141,8 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
 \end{lstlisting}
 
 \begin{verbatim}
-R Under development (unstable) (2014-11-27 r67068)
-Platform: x86_64-unknown-linux-gnu (64-bit)
+R version 3.1.1 (2014-07-10)
+Platform: i586-pc-linux-gnu (32-bit)
 
 locale:
  [1] LC_CTYPE=es_ES.utf8       LC_NUMERIC=C             
@@ -156,11 +156,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] rasterVis_0.35      latticeExtra_0.6-26 RColorBrewer_1.0-5 
-[4] lattice_0.20-29     raster_2.3-12       sp_1.0-15          
+[1] RColorBrewer_1.0-5 lattice_0.20-27   
 
 loaded via a namespace (and not attached):
-[1] compiler_3.2.0 grid_3.2.0     hexbin_1.27.0  tools_3.2.0    zoo_1.7-11
+[1] compiler_3.1.1 grid_3.1.1     tools_3.1.1
 \end{verbatim}
 \end{frame}
 
@@ -175,7 +174,7 @@ loaded via a namespace (and not attached):
 \end{lstlisting}
 
 \begin{verbatim}
-[1] ‘0.20.29’
+[1] ‘0.20.27’
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -185,8 +184,8 @@ loaded via a namespace (and not attached):
 
 \begin{verbatim}
 Package: lattice
-Version: 0.20-29
-Date: 2014/04/01
+Version: 0.20-27
+Date: 2014/02/27
 Priority: recommended
 Title: Lattice Graphics
 Author: Deepayan Sarkar <deepayan.sarkar@r-project.org>
@@ -204,12 +203,11 @@ LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 URL: http://lattice.r-forge.r-project.org/
-BugReports: http://r-forge.r-project.org/projects/lattice/
-Packaged: 2014-04-03 11:25:19 UTC; deepayan
+Packaged: 2014-02-27 06:16:44 UTC; deepayan
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2014-04-04 08:56:27
-Built: R 3.2.0; x86_64-unknown-linux-gnu; 2014-10-09 20:15:02 UTC; unix
+Date/Publication: 2014-02-27 09:14:01
+Built: R 3.0.2; i486-pc-linux-gnu; 2014-03-24 18:34:08 UTC; unix
 
 -- File: /usr/local/lib/R/site-library/lattice/Meta/package.rds
 \end{verbatim}
@@ -227,8 +225,28 @@ Built: R 3.2.0; x86_64-unknown-linux-gnu; 2014-10-09 20:15:02 UTC; unix
 \end{lstlisting}
 \end{frame}
 
-\section{Vectores y Matrices}
+\section{Objetos en R}
 \label{sec-2}
+
+\begin{frame}[fragile,label=sec-2-0-1]{Objetos en R}
+ \begin{itemize}
+\item Existen varios objetos en R:
+\begin{itemize}
+\item Vectores
+\item Listas
+\item Funciones
+\item \ldots{}
+\end{itemize}
+\item A partir de estos objetos se definen varias clases:
+\begin{itemize}
+\item \texttt{matrix}
+\item \texttt{data.frame}
+\item \texttt{factor}
+\item \texttt{Date}, \texttt{POSIXct}
+\item \ldots{}
+\end{itemize}
+\end{itemize}
+\end{frame}
 
 \subsection{Vectores}
 \label{sec-2-1}
@@ -236,12 +254,12 @@ Built: R 3.2.0; x86_64-unknown-linux-gnu; 2014-10-09 20:15:02 UTC; unix
 \begin{frame}[fragile,label=sec-2-1-1]{Primeros pasos}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-x <- 1
+x <- 1:5
 x
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1
+[1] 1 2 3 4 5
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -250,7 +268,7 @@ length(x)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1
+[1] 5
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -259,104 +277,12 @@ class(x)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "numeric"
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-x <- c(1, 2, 3)
-x
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 1 2 3
+[1] "integer"
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-1-2]{Operaciones sencillas con vectores}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x + 1
-\end{lstlisting}
 
-\begin{verbatim}
-[1] 2 3 4
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  y <- 1:10
-  x + y
-\end{lstlisting}
-
-\begin{verbatim}
- [1]  2  4  6  5  7  9  8 10 12 11
-Warning message:
-In x + y :
-  longitud de objeto mayor no es múltiplo de la longitud de uno menor
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x * y
-\end{lstlisting}
-
-\begin{verbatim}
- [1]  1  4  9  4 10 18  7 16 27 10
-Warning message:
-In x * y :
-  longitud de objeto mayor no es múltiplo de la longitud de uno menor
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x^2
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 1 4 9
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x^2 + y^3
-\end{lstlisting}
-
-\begin{verbatim}
- [1]    2   12   36   65  129  225  344  516  738 1001
-Warning message:
-In x^2 + y^3 :
-  longitud de objeto mayor no es múltiplo de la longitud de uno menor
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-3]{¿Y qué hago cuando necesito ayuda?}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  exp(x)
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  2.718282  7.389056 20.085537
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  log(x)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 0.0000000 0.6931472 1.0986123
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-help(exp)
-help(log)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-4]{Generar vectores con \texttt{seq}}
+\begin{frame}[fragile,label=sec-2-1-2]{Generar vectores con \texttt{seq}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 x1 <- seq(1, 100, by=2)
@@ -379,8 +305,18 @@ seq(1, 100, length=10)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-2-1-5]{Unir vectores con \texttt{c}}
+\begin{frame}[fragile,label=sec-2-1-3]{Unir vectores con \texttt{c}}
  \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+x <- c(1, 2, 3)
+x
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 1 2 3
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 x <- seq(1, 100, length=10)
 y <- seq(2, 100, length=50)
@@ -394,287 +330,56 @@ z
 [39]  58  60  62  64  66  68  70  72  74  76  78  80  82  84  86  88  90  92  94
 [58]  96  98 100
 \end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-z + c(1, 2)
-\end{lstlisting}
-
-\begin{verbatim}
- [1]   2  14  24  36  46  58  68  80  90 102   3   6   7  10  11  14  15  18  19
-[20]  22  23  26  27  30  31  34  35  38  39  42  43  46  47  50  51  54  55  58
-[39]  59  62  63  66  67  70  71  74  75  78  79  82  83  86  87  90  91  94  95
-[58]  98  99 102
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-z + c(1, 2, 3, 4, 5, 6, 7)
-\end{lstlisting}
-
-\begin{verbatim}
- [1]   2  14  26  38  50  62  74  79  91 103   6   9  12  15  11  14  17  20  23
-[20]  26  29  25  28  31  34  37  40  43  39  42  45  48  51  54  57  53  56  59
-[39]  62  65  68  71  67  70  73  76  79  82  85  81  84  87  90  93  96  99  95
-[58]  98 101 104
-Warning message:
-In z + c(1, 2, 3, 4, 5, 6, 7) :
-  longitud de objeto mayor no es múltiplo de la longitud de uno menor
-\end{verbatim}
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-2-1-6]{Indexado numérico de vectores}
+\begin{frame}[fragile,label=sec-2-1-4]{Operaciones sencillas con vectores}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  x <- seq(1, 100, 2)
-  x[c(1, 2, 3, 4, 5)]
+  x <- 1:5
+  x + 1
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1 3 5 7 9
+[1] 2 3 4 5 6
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  x[1:5]
+  x^2
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1 3 5 7 9
+[1]  1  4  9 16 25
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  x[10:5]
+  y <- 1:10
+  x + y
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 19 17 15 13 11  9
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-7]{Indexado de vectores con condiciones lógicas}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  condicion <- (x>30)
-  condicion
-\end{lstlisting}
-
-\begin{verbatim}
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[49]  TRUE  TRUE
+[1]  2  4  6  8 10  7  9 11 13 15
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  class(condicion)
+  x * y
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "logical"
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-8]{Indexado de vectores con condiciones lógicas}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x == 37
-\end{lstlisting}
-
-\begin{verbatim}
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
-[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[49] FALSE FALSE
+[1]  1  4  9 16 25  6 14 24 36 50
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  x[x == 37]
+  x^2 + y^3
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 37
+[1]    2   12   36   80  150  217  347  521  745 1025
 \end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x[x != 9]
-\end{lstlisting}
-
-\begin{verbatim}
- [1]  1  3  5  7 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51
-[26] 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x[x > 20]
-\end{lstlisting}
-
-\begin{verbatim}
- [1] 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 57 59 61 63 65 67 69
-[26] 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
-\end{verbatim}
-\end{frame}
-
-
-\begin{frame}[fragile,label=sec-2-1-9]{Indexado de vectores con \texttt{\%in\%}}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-y <- seq(101, 200, 2)
-y %in% c(101, 127, 141)
-\end{lstlisting}
-
-\begin{verbatim}
- [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[49] FALSE FALSE
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-y[y %in% c(101, 127, 141)]
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 101 127 141
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-10]{Indexado de vectores con condiciones múltiples}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-z <- c(x, y)
-\end{lstlisting}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-z[z < 30 | z > 150]
-\end{lstlisting}
-
-\begin{verbatim}
- [1]   1   3   5   7   9  11  13  15  17  19  21  23  25  27  29 151 153 155 157
-[20] 159 161 163 165 167 169 171 173 175 177 179 181 183 185 187 189 191 193 195
-[39] 197 199
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-z[z >= 30 & z <= 150]
-\end{lstlisting}
-
-\begin{verbatim}
- [1]  31  33  35  37  39  41  43  45  47  49  51  53  55  57  59  61  63  65  67
-[20]  69  71  73  75  77  79  81  83  85  87  89  91  93  95  97  99 101 103 105
-[39] 107 109 111 113 115 117 119 121 123 125 127 129 131 133 135 137 139 141 143
-[58] 145 147 149
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-11]{Indexado de vectores con condiciones múltiples}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-cond  <-  (x>10) & (x<50)
-cond
-\end{lstlisting}
-
-\begin{verbatim}
- [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[25]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[49] FALSE FALSE
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-cond  <-  (x>=10) & (x<=50)
-cond
-\end{lstlisting}
-
-\begin{verbatim}
- [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[25]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[49] FALSE FALSE
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-x[cond]
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-1-12]{Con las condiciones se pueden hacer operaciones}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-sum(cond)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 20
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-!cond
-\end{lstlisting}
-
-\begin{verbatim}
- [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[25] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-[49]  TRUE  TRUE
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-sum(!cond)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 30
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-as.numeric(cond)
-\end{lstlisting}
-
-\begin{verbatim}
- [1] 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
-[39] 0 0 0 0 0 0 0 0 0 0 0 0
-\end{verbatim}
-\end{frame}
-
-
-
-\begin{frame}[fragile,label=sec-2-1-13]{Funciones predefinidas}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-summary(x)
-mean(x)
-sd(x)
-median(x)
-max(x)
-min(x)
-range(x)
-quantile(x)
-\end{lstlisting}
 \end{frame}
 
 
@@ -767,30 +472,88 @@ z    1    2    3    4    5    6    7    8    9    10
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2-3]{Transponer una matriz}
+
+
+\subsection{Listas}
+\label{sec-2-3}
+\begin{frame}[fragile,label=sec-2-3-1]{Para crear una lista usamos la función \texttt{list}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-t(M)
+lista <- list(a=c(1,3,5),
+              b=c('l', 'p', 'r', 's'),
+              c=3)
+lista
 \end{lstlisting}
 
 \begin{verbatim}
-       x  y  z
- [1,]  1  1  1
- [2,]  2  2  2
- [3,]  3  3  3
- [4,]  4  4  4
- [5,]  5  5  5
- [6,]  6  6  6
- [7,]  7  7  7
- [8,]  8  8  8
- [9,]  9  9  9
-[10,] 10 10 10
-\end{verbatim}
+$a
+[1] 1 3 5
 
+$b
+[1] "l" "p" "r" "s"
+
+$c
+[1] 3
+\end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-dim(t(M))
+class(lista)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] "list"
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+length(lista)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+\end{frame}
+
+
+
+\subsection{Data.frame}
+\label{sec-2-4}
+\begin{frame}[fragile,label=sec-2-4-1]{Para crear un \texttt{data.frame}\ldots{}}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  df <- data.frame(x = 1:5,
+                   y = rnorm(10),
+                   z = 0)
+  df
+\end{lstlisting}
+
+\begin{verbatim}
+   x          y z
+1  1 -0.7545423 0
+2  2 -1.2616725 0
+3  3  0.7946587 0
+4  4 -0.9536974 0
+5  5  1.7672158 0
+6  1  1.3973362 0
+7  2 -0.1051969 0
+8  3  1.0237416 0
+9  4 -0.1157114 0
+10 5 -0.3948580 0
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  length(df)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  dim(df)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -798,41 +561,210 @@ dim(t(M))
 \end{verbatim}
 \end{frame}
 
+\subsection{Funciones}
+\label{sec-2-5}
 
-\begin{frame}[fragile,label=sec-2-2-4]{Indexado de matrices}
+\begin{frame}[fragile,label=sec-2-5-1]{Para definir una función usamos la función \texttt{function}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-M[]
+myFun <- function(x, y) x + y
+myFun
 \end{lstlisting}
 
 \begin{verbatim}
-  [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-x    1    2    3    4    5    6    7    8    9    10
-y    1    2    3    4    5    6    7    8    9    10
-z    1    2    3    4    5    6    7    8    9    10
+function(x, y) x + y
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-M[1, ]
+  class(myFun)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  1  2  3  4  5  6  7  8  9 10
+[1] "function"
 \end{verbatim}
+
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-M[, 1]
+  myFun(3, 4)
 \end{lstlisting}
 
 \begin{verbatim}
-x y z 
-1 1 1
+[1] 7
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2-5]{Indexado de matrices}
+\begin{frame}[fragile,label=sec-2-5-2]{Podemos construir a partir de funciones}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+foo  <-  function(x, ...){
+  mx <- mean(x, ...)
+  medx <- median(x, ...)
+  sdx <- sd(x, ...)
+  c(mx, medx, sdx)
+  }
+\end{lstlisting}
+
+O en forma resumida:
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile,label=sec-2-5-3]{Y ahora usamos la función con vectores}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+foo(1:10)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 5.50000 5.50000 3.02765
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+foo(rnorm(1e5))
+\end{lstlisting}
+
+\begin{verbatim}
+[1]  1.931042e-03 -3.182508e-05  1.001589e+00
+\end{verbatim}
+\end{frame}
+
+\section{Indexado}
+\label{sec-3}
+\subsection{Vectores}
+\label{sec-3-1}
+\begin{frame}[fragile,label=sec-3-1-1]{Indexado numérico}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x <- seq(1, 100, 2)
+  x
+\end{lstlisting}
+
+\begin{verbatim}
+ [1]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49
+[26] 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x[1:5]
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 1 3 5 7 9
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x[10:5]
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 19 17 15 13 11  9
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-3-1-2]{Indexado con condiciones lógicas}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x == 37
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[49] FALSE FALSE
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x[x == 37]
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 37
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x[x != 9]
+\end{lstlisting}
+
+\begin{verbatim}
+ [1]  1  3  5  7 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51
+[26] 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  x[x > 20]
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 57 59 61 63 65 67 69
+[26] 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+\end{verbatim}
+\end{frame}
+
+
+
+\begin{frame}[fragile,label=sec-3-1-3]{Indexado con condiciones múltiples}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+z <- seq(-10, 10, by = .5)
+z
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] -10.0  -9.5  -9.0  -8.5  -8.0  -7.5  -7.0  -6.5  -6.0  -5.5  -5.0  -4.5
+[13]  -4.0  -3.5  -3.0  -2.5  -2.0  -1.5  -1.0  -0.5   0.0   0.5   1.0   1.5
+[25]   2.0   2.5   3.0   3.5   4.0   4.5   5.0   5.5   6.0   6.5   7.0   7.5
+[37]   8.0   8.5   9.0   9.5  10.0
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+z[z < -5 | z > 5]
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] -10.0  -9.5  -9.0  -8.5  -8.0  -7.5  -7.0  -6.5  -6.0  -5.5   5.5   6.0
+[13]   6.5   7.0   7.5   8.0   8.5   9.0   9.5  10.0
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+cond <- (z >= 0 & z <= 5)
+cond
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+[25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE FALSE FALSE FALSE
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+z[cond]
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+\end{verbatim}
+\end{frame}
+
+\subsection{Matrices}
+\label{sec-3-2}
+\begin{frame}[fragile,label=sec-3-2-1]{Indexado de matrices}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 M[1:2, ]
@@ -865,7 +797,7 @@ M[1, c(1, 4)]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2-6]{Indexado de matrices}
+\begin{frame}[fragile,label=sec-3-2-2]{Indexado de matrices}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 M[-1,]
@@ -887,196 +819,13 @@ M[-c(1, 2),]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2-7]{Operaciones con matrices}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-M * M
-\end{lstlisting}
-
-\begin{verbatim}
-  [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-x    1    4    9   16   25   36   49   64   81   100
-y    1    4    9   16   25   36   49   64   81   100
-z    1    4    9   16   25   36   49   64   81   100
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-M ^ 2
-\end{lstlisting}
-
-\begin{verbatim}
-  [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-x    1    4    9   16   25   36   49   64   81   100
-y    1    4    9   16   25   36   49   64   81   100
-z    1    4    9   16   25   36   49   64   81   100
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-M %*% M
-\end{lstlisting}
-
-\begin{verbatim}
-Error in M %*% M : argumentos no compatibles
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-M %*% t(M)
-\end{lstlisting}
-
-\begin{verbatim}
-    x   y   z
-x 385 385 385
-y 385 385 385
-z 385 385 385
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-2-8]{Operaciones con matrices: funciones predefinidas}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-sum(M)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 165
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-rowSums(M)
-\end{lstlisting}
-
-\begin{verbatim}
- x  y  z 
-55 55 55
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-colSums(M)
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  3  6  9 12 15 18 21 24 27 30
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-rowMeans(M)
-\end{lstlisting}
-
-\begin{verbatim}
-  x   y   z 
-5.5 5.5 5.5
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-colMeans(M)
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  1  2  3  4  5  6  7  8  9 10
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-2-2-9]{La función \texttt{apply}}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 1, sum)
-\end{lstlisting}
-
-\begin{verbatim}
- x  y  z 
-55 55 55
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 2, sum)
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  3  6  9 12 15 18 21 24 27 30
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 1, mean)
-\end{lstlisting}
-
-\begin{verbatim}
-  x   y   z 
-5.5 5.5 5.5
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 2, mean)
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  1  2  3  4  5  6  7  8  9 10
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 1, sd, na.rm=TRUE)
-\end{lstlisting}
-
-\begin{verbatim}
-      x       y       z 
-3.02765 3.02765 3.02765
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 2, sd)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 0 0 0 0 0 0 0 0 0 0
-\end{verbatim}
-\end{frame}
-
-
-\section{Listas y data.frame}
-\label{sec-3}
 
 \subsection{Listas}
-\label{sec-3-1}
-\begin{frame}[fragile,label=sec-3-1-1]{Para crear una lista usamos la función \texttt{list}}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  lista <- list(a=c(1,3,5),
-                b=c('l', 'p', 'r', 's'),
-                c=3)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-3-1-2]{Podemos acceder a los elementos\ldots{}}
+\label{sec-3-3}
+\begin{frame}[fragile,label=sec-3-3-1]{Podemos acceder a los elementos\ldots{}}
  \begin{itemize}
 \item Por su nombre
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-lista
-\end{lstlisting}
-
-\begin{verbatim}
-$a
-[1] 1 3 5
-
-$b
-[1] "l" "p" "r" "s"
-
-$c
-[1] 3
-\end{verbatim}
-
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 lista$a
@@ -1086,27 +835,7 @@ lista$a
 [1] 1 3 5
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-lista$b
-\end{lstlisting}
-
-\begin{verbatim}
-[1] "l" "p" "r" "s"
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-lista$c
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 3
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-3-1-3]{Podemos acceder a los elementos\ldots{}}
- \begin{itemize}
+\begin{itemize}
 \item o por su índice
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -1127,27 +856,94 @@ $a
 \begin{verbatim}
 [1] 1 3 5
 \end{verbatim}
+\end{frame}
 
+\subsection{Data Frame}
+\label{sec-3-4}
+\begin{frame}[fragile,label=sec-3-4-1]{Podemos acceder a los elementos}
+ \begin{itemize}
+\item Por su nombre (como una lista)
+\end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  class(lista[1])
+df$x
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "list"
+[1] 1 2 3 4 5 1 2 3 4 5
+\end{verbatim}
+
+\begin{itemize}
+\item Por su índice (como una matriz)
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+df[1,]
+\end{lstlisting}
+
+\begin{verbatim}
+  x          y z
+1 1 -0.7545423 0
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  class(lista[[1]])
+df[,1]
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "numeric"
+[1] 1 2 3 4 5 1 2 3 4 5
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-1-4]{Para matrices \texttt{apply}, para listas \texttt{lapply} y \texttt{sapply}}
+\section{Bucles}
+\label{sec-4}
+
+\subsection{Matrices}
+\label{sec-4-1}
+\begin{frame}[fragile,label=sec-4-1-1]{La función \texttt{apply}}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+apply(M, 1, sum)
+\end{lstlisting}
+
+\begin{verbatim}
+ x  y  z 
+55 55 55
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+rowSums(M)
+\end{lstlisting}
+
+\begin{verbatim}
+ x  y  z 
+55 55 55
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+apply(M, 2, mean)
+\end{lstlisting}
+
+\begin{verbatim}
+[1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+colMeans(M)
+\end{lstlisting}
+
+\begin{verbatim}
+[1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\end{frame}
+
+\subsection{Listas / \texttt{data.frame}}
+\label{sec-4-2}
+\begin{frame}[fragile,label=sec-4-2-1]{\texttt{lapply} y \texttt{sapply}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 lista <- list(x = 1:10,
@@ -1164,7 +960,7 @@ $y
 [1] 30
 
 $z
-[1] 8.055303
+[1] 4.45118
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -1173,282 +969,10 @@ sapply(lista, sum)
 \end{lstlisting}
 
 \begin{verbatim}
-        x         y         z 
-55.000000 30.000000  8.055303
+       x        y        z 
+55.00000 30.00000  4.45118
 \end{verbatim}
 \end{frame}
-
-
-\subsection{Data.frame}
-\label{sec-3-2}
-\begin{frame}[fragile,label=sec-3-2-1]{Para crear un \texttt{data.frame}\ldots{}}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  df <- data.frame(x = 1:10,
-                   y = rnorm(10),
-                   z = 0)
-  df
-\end{lstlisting}
-
-\begin{verbatim}
-    x            y z
-1   1 -0.005425031 0
-2   2  0.942309821 0
-3   3 -1.084928250 0
-4   4 -0.980635512 0
-5   5 -1.058314472 0
-6   6  1.821599231 0
-7   7  0.035707230 0
-8   8  1.194930335 0
-9   9 -0.383175038 0
-10 10 -1.210006388 0
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  length(df)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 3
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  dim(df)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 10  3
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-3-2-2]{Podemos acceder a los elementos}
- \begin{itemize}
-\item Por su nombre
-\end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-df$x
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  1  2  3  4  5  6  7  8  9 10
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-df$y
-\end{lstlisting}
-
-\begin{verbatim}
-[1] -0.005425031  0.942309821 -1.084928250 -0.980635512 -1.058314472
-[6]  1.821599231  0.035707230  1.194930335 -0.383175038 -1.210006388
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-df$z
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 0 0 0 0 0 0 0 0 0 0
-\end{verbatim}
-
-\begin{itemize}
-\item Por su índice
-\end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-df[1,]
-\end{lstlisting}
-
-\begin{verbatim}
-  x            y z
-1 1 -0.005425031 0
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-df[,1]
-\end{lstlisting}
-
-\begin{verbatim}
-[1]  1  2  3  4  5  6  7  8  9 10
-\end{verbatim}
-\end{frame}
-
-
-\begin{frame}[fragile,label=sec-3-2-3]{La regla del reciclaje}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  year <- 2011
-  month <- 1:12
-  class <- c('A', 'B', 'C')
-  vals <- rnorm(12)
-  
-  dats <- data.frame(year, month, class, vals)
-  dats
-\end{lstlisting}
-
-\begin{verbatim}
-   year month class       vals
-1  2011     1     A  0.6343656
-2  2011     2     B -0.2846677
-3  2011     3     C  0.3703119
-4  2011     4     A  0.2659838
-5  2011     5     B  2.3330955
-6  2011     6     C  0.4838441
-7  2011     7     A -1.5464199
-8  2011     8     B  1.2708293
-9  2011     9     C -0.2421688
-10 2011    10     A -0.5854677
-11 2011    11     B -0.5771280
-12 2011    12     C -0.3787130
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-3-2-4]{La función \texttt{expand.grid}}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(x = x, y = y)
-  head(df)
-\end{lstlisting}
-
-\begin{verbatim}
-          x         y
-1 -12.56637 -12.56637
-2 -12.44008 -12.56637
-3 -12.31378 -12.56637
-4 -12.18749 -12.56637
-5 -12.06119 -12.56637
-6 -11.93489 -12.56637
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  tail(df)
-\end{lstlisting}
-
-\begin{verbatim}
-             x        y
-39995 11.93489 12.56637
-39996 12.06119 12.56637
-39997 12.18749 12.56637
-39998 12.31378 12.56637
-39999 12.44008 12.56637
-40000 12.56637 12.56637
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  summary(df)
-\end{lstlisting}
-
-\begin{verbatim}
-      x                 y          
-Min.   :-12.566   Min.   :-12.566  
-1st Qu.: -6.283   1st Qu.: -6.283  
-Median :  0.000   Median :  0.000  
-Mean   :  0.000   Mean   :  0.000  
-3rd Qu.:  6.283   3rd Qu.:  6.283  
-Max.   : 12.566   Max.   : 12.566
-\end{verbatim}
-\end{frame}
-
-
-\section{Funciones}
-\label{sec-4}
-
-\subsection{Definición de funciones}
-\label{sec-4-1}
-\begin{frame}[fragile,label=sec-4-1-1]{Para definir una función usamos la función \texttt{function}}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  myFun <- function(x, y) x + y
-  myFun(3, 4)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 7
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  class(myFun)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] "function"
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-4-1-2]{Definir una función a partir de funciones}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-foo  <-  function(x, ...){
-  mx <- mean(x, ...)
-  medx <- median(x, ...)
-  sdx <- sd(x, ...)
-  c(mx, medx, sdx)
-  }
-\end{lstlisting}
-
-O en forma resumida:
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
-\end{lstlisting}
-\end{frame}
-
-
-\subsection{Uso de funciones}
-\label{sec-4-2}
-\begin{frame}[fragile,label=sec-4-2-1]{Y ahora usamos la función con vectores}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-foo(1:10)
-\end{lstlisting}
-
-\begin{verbatim}
-[1] 5.50000 5.50000 3.02765
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-foo(rnorm(1e5))
-\end{lstlisting}
-
-\begin{verbatim}
-[1] -0.002198758 -0.003186011  1.000672564
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-4-2-2]{Y también funciona con matrices}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-rowMeans(M)
-\end{lstlisting}
-
-\begin{verbatim}
-  x   y   z 
-5.5 5.5 5.5
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-apply(M, 1, foo)
-\end{lstlisting}
-
-\begin{verbatim}
-           x       y       z
-[1,] 5.50000 5.50000 5.50000
-[2,] 5.50000 5.50000 5.50000
-[3,] 3.02765 3.02765 3.02765
-\end{verbatim}
-\end{frame}
-
 
 \section{Datos con R}
 \label{sec-5}
@@ -1534,8 +1058,8 @@ apply(M, 1, foo)
 \begin{frame}[fragile,label=sec-5-1-4]{Lectura de datos con \texttt{read.table}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  aranjuez <- read.csv('data/aranjuez.csv')
-  head(aranjuez)
+aranjuez <- read.csv('data/aranjuez.csv')
+head(aranjuez)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1654,7 +1178,8 @@ head(aranjuez[idx, ])
 \begin{lstlisting}
 subset(aranjuez,
        subset = (Radiation > 20 & TempAvg < 10),
-       select = c(Radiation, TempAvg, TempMax, TempMin))
+       select = c(Radiation, TempAvg,
+           TempMax, TempMin))
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1692,7 +1217,8 @@ subset(aranjuez,
 \begin{lstlisting}
 aranjuez$rainy <- aranjuez$Rain > 0
 
-aggregate(Radiation ~ rainy, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ rainy, data = aranjuez,
+          FUN = mean)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1707,7 +1233,8 @@ aggregate(Radiation ~ rainy, data = aranjuez, FUN = mean)
 \begin{lstlisting}
 aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
 
-aggregate(Radiation ~ tempClass, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ tempClass, data = aranjuez,
+          FUN = mean)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1721,7 +1248,8 @@ aggregate(Radiation ~ tempClass, data = aranjuez, FUN = mean)
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-aggregate(Radiation ~ tempClass + rainy, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1772,7 +1300,8 @@ aranjuez$quarter <- quarters(aranjuez$date)
 \begin{frame}[fragile,label=sec-5-3-4]{Agregamos con fechas}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  aggregate(Radiation ~ year, data = aranjuez, FUN=mean)
+aggregate(Radiation ~ year, data = aranjuez,
+          FUN=mean)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1789,7 +1318,8 @@ aranjuez$quarter <- quarters(aranjuez$date)
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  aggregate(Radiation ~ month + year, data = aranjuez, FUN=mean)
+aggregate(Radiation ~ month + year,
+          data = aranjuez, FUN=mean)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1891,27 +1421,13 @@ aranjuez$quarter <- quarters(aranjuez$date)
 95    11 2011  7.938400
 96    12 2011  7.395516
 \end{verbatim}
+\end{frame}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label=sec-5-3-5]{Agregamos varias variables con fechas}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-aggregate(cbind(Radiation, TempAvg) ~ year, data = aranjuez, FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-  year Radiation  TempAvg
-1 2004  16.39449 14.06942
-2 2005  17.34966 14.26644
-3 2006  16.00713 14.70299
-4 2007  16.40107 13.40694
-5 2008  16.19843 13.85437
-6 2009  17.44067 15.49388
-7 2010  16.66956 14.40924
-8 2011  17.47265 15.18371
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
+aggregate(cbind(Radiation, TempAvg) ~ month + year,
+          data = aranjuez, FUN = mean)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -2015,9 +1531,106 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \end{verbatim}
 \end{frame}
 
+\subsection{Regresión lineal}
+\label{sec-5-4}
+
+\begin{frame}[fragile,label=sec-5-4-1]{\texttt{lm}: Regresión simple}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+radTemp <- lm(Radiation ~ TempAvg, data = aranjuez)
+summary(radTemp)
+\end{lstlisting}
+
+\begin{verbatim}
+Call:
+lm(formula = Radiation ~ TempAvg, data = aranjuez)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-20.1437  -3.6000   0.2903   3.7191  15.8617 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  5.07258    0.20585   24.64   <2e-16 ***
+TempAvg      0.80932    0.01244   65.08   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.431 on 2883 degrees of freedom
+  (13 observations deleted due to missingness)
+Multiple R-squared:  0.595,	Adjusted R-squared:  0.5948 
+F-statistic:  4235 on 1 and 2883 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\end{frame}
+
+
+\begin{frame}[fragile,label=sec-5-4-2]{\texttt{lm}: Regresión multiple}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+radTempHumid <- lm(Radiation ~ TempAvg * HumidAvg,
+                   data = aranjuez)
+summary(radTempHumid)
+\end{lstlisting}
+
+\begin{verbatim}
+Call:
+lm(formula = Radiation ~ TempAvg * HumidAvg, data = aranjuez)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.1493  -2.7493   0.0142   2.7647  13.9198 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      34.5033445  0.8610398  40.072  < 2e-16 ***
+TempAvg           0.0527658  0.0410350   1.286    0.199    
+HumidAvg         -0.3588349  0.0115441 -31.084  < 2e-16 ***
+TempAvg:HumidAvg  0.0047893  0.0006621   7.233 6.03e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.236 on 2881 degrees of freedom
+  (13 observations deleted due to missingness)
+Multiple R-squared:  0.7537,	Adjusted R-squared:  0.7535 
+F-statistic:  2939 on 3 and 2881 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-4-3]{\texttt{lm}: Regresión multiple}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+radTempRain <- lm(Radiation ~ TempAvg * rainy,
+                  data = aranjuez)
+summary(radTempRain)
+\end{lstlisting}
+
+\begin{verbatim}
+Call:
+lm(formula = Radiation ~ TempAvg * rainy, data = aranjuez)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-17.0597  -3.3220   0.0441   3.3454  15.0028 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)        7.72388    0.24232  31.874  < 2e-16 ***
+TempAvg            0.73334    0.01328  55.204  < 2e-16 ***
+rainyTRUE         -3.78620    0.41024  -9.229  < 2e-16 ***
+TempAvg:rainyTRUE -0.12163    0.03077  -3.953 7.89e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.929 on 2881 degrees of freedom
+  (13 observations deleted due to missingness)
+Multiple R-squared:  0.6665,	Adjusted R-squared:  0.6662 
+F-statistic:  1920 on 3 and 2881 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\end{frame}
+
 \section{Visualización de datos}
 \label{sec-6}
-\subsection{Lattice}
+\subsection{Catálogo}
 \label{sec-6-1}
 
 \begin{frame}[fragile,label=sec-6-1-1]{Lattice}
@@ -2042,9 +1655,99 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \includegraphics[width=.9\linewidth]{figs/xyplot.pdf}
 \end{frame}
 
+\begin{frame}[fragile,label=sec-6-1-4]{Paneles}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  xyplot(Radiation ~ TempAvg|factor(year),
+         data=aranjuez)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-5]{}
+\includegraphics[width=.9\linewidth]{figs/xyplotYear.pdf}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-6]{Grupos}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  xyplot(Radiation ~ TempAvg, groups=quarter,
+         data=aranjuez, auto.key=list(space='right'))
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-7]{}
+\includegraphics[width=.9\linewidth]{figs/xyplotQuarter.pdf}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-8]{Matriz de gráficos de dispersión}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-9]{}
+\includegraphics[width=.9\linewidth]{figs/splom.png}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-10]{Matriz de gráficos de dispersión}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        groups=aranjuez$quarter,
+        auto.key=list(space='right'),
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-11]{}
+\includegraphics[width=.9\linewidth]{figs/splomGroup.png}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-12]{Box-and-Whiskers}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=FALSE, pch='|')
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-13]{}
+\includegraphics[width=.9\linewidth]{figs/bwplot.pdf}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-14]{Histogramas}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  histogram(~ Radiation|factor(year), data=aranjuez)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-15]{}
+\includegraphics[width=.9\linewidth]{figs/histogram.pdf}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-16]{Gráficos de densidad}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+densityplot(~ Radiation, groups=quarter,
+            data=aranjuez,
+            auto.key=list(space='right'))
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-6-1-17]{}
+\includegraphics[width=.9\linewidth]{figs/density.pdf}
+\end{frame}
 
 
-\begin{frame}[fragile,label=sec-6-1-4]{Añadimos regresión lineal}
+
+\subsection{Ajustes}
+\label{sec-6-2}
+\begin{frame}[fragile,label=sec-6-2-1]{Añadimos regresión lineal}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
   xyplot(Radiation ~ TempAvg, data=aranjuez,
@@ -2053,13 +1756,13 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-6-1-5]{}
+\begin{frame}[label=sec-6-2-2]{}
 \includegraphics[width=.9\linewidth]{figs/xyplotPRG.pdf}
 \end{frame}
 
 
 
-\begin{frame}[fragile,label=sec-6-1-6]{Añadimos ajuste local}
+\begin{frame}[fragile,label=sec-6-2-3]{Añadimos ajuste local}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
   xyplot(Radiation ~ TempAvg, data=aranjuez,
@@ -2068,36 +1771,12 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-6-1-7]{}
+\begin{frame}[label=sec-6-2-4]{}
 \includegraphics[width=.9\linewidth]{figs/xyplotSmooth.pdf}
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-6-1-8]{Paneles}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  xyplot(Radiation ~ TempAvg|factor(year),
-         data=aranjuez)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-9]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotYear.pdf}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-6-1-10]{Grupos}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, groups=quarter,
-         data=aranjuez, auto.key=list(space='right'))
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-11]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotQuarter.pdf}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-6-1-12]{Colores y tamaños}
+\begin{frame}[fragile,label=sec-6-2-5]{Colores y tamaños}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
   xyplot(Radiation ~ TempAvg,
@@ -2109,11 +1788,11 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-6-1-13]{}
+\begin{frame}[label=sec-6-2-6]{}
 \includegraphics[width=.9\linewidth]{figs/xyplotColors.pdf}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-14]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
+\begin{frame}[fragile,label=sec-6-2-7]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
  \begin{itemize}
 \item Primero definimos el tema con \texttt{simpleTheme}
 \end{itemize}
@@ -2125,7 +1804,7 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-15]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
+\begin{frame}[fragile,label=sec-6-2-8]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
  \begin{itemize}
 \item Aplicamos el resultado en \texttt{par.settings}
 \end{itemize}
@@ -2139,11 +1818,11 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-6-1-16]{}
+\begin{frame}[label=sec-6-2-9]{}
 \includegraphics[width=.9\linewidth]{figs/myTheme.pdf}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-17]{Colores: brewer.pal}
+\begin{frame}[fragile,label=sec-6-2-10]{Colores: brewer.pal}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 library(RColorBrewer)
@@ -2158,7 +1837,7 @@ myTheme <- simpleTheme(col = myPal,
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-18]{Asignamos paleta con \texttt{par.settings}}
+\begin{frame}[fragile,label=sec-6-2-11]{Asignamos paleta con \texttt{par.settings}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 xyplot(Radiation ~ TempAvg,
@@ -2169,73 +1848,8 @@ xyplot(Radiation ~ TempAvg,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-6-1-19]{}
+\begin{frame}[label=sec-6-2-12]{}
 \includegraphics[width=.9\linewidth]{figs/brewer.pdf}
-\end{frame}
-
-
-\begin{frame}[fragile,label=sec-6-1-20]{Matriz de gráficos de dispersión}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-21]{}
-\includegraphics[width=.9\linewidth]{figs/splom.png}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-6-1-22]{Matriz de gráficos de dispersión}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        groups=aranjuez$quarter,
-        auto.key=list(space='right'),
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-23]{}
-\includegraphics[width=.9\linewidth]{figs/splomGroup.png}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-6-1-24]{Box-and-Whiskers}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  bwplot(Radiation ~ month, data=aranjuez,
-         horizontal=FALSE, pch='|')
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-25]{}
-\includegraphics[width=.9\linewidth]{figs/bwplot.pdf}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-6-1-26]{Histogramas}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-  histogram(~ Radiation|factor(year), data=aranjuez)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-27]{}
-\includegraphics[width=.9\linewidth]{figs/histogram.pdf}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-6-1-28]{Gráficos de densidad}
- \lstset{language=R,label= ,caption= ,numbers=none}
-\begin{lstlisting}
-densityplot(~ Radiation, groups=quarter,
-            data=aranjuez,
-            auto.key=list(space='right'))
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label=sec-6-1-29]{}
-\includegraphics[width=.9\linewidth]{figs/density.pdf}
 \end{frame}
 % Emacs 24.4.1 (Org mode 8.2.7c)
 \end{document}
