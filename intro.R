@@ -21,37 +21,12 @@
 
 ## Primeros pasos
 
-x <- 1
+x <- 1:5
 x
 
 length(x)
 
 class(x)
-
-x <- c(1, 2, 3)
-x
-
-## Operaciones sencillas con vectores
-
-  x + 1
-
-  y <- 1:10
-  x + y
-
-  x * y
-
-  x^2
-
-  x^2 + y^3
-
-## ¿Y qué hago cuando necesito ayuda?
-
-  exp(x)
-
-  log(x)
-
-help(exp)
-help(log)
 
 ## Generar vectores con =seq=
 
@@ -62,86 +37,27 @@ seq(1, 100, length=10)
 
 ## Unir vectores con =c=
 
+x <- c(1, 2, 3)
+x
+
 x <- seq(1, 100, length=10)
 y <- seq(2, 100, length=50)
 z <- c(x, y)
 z
 
-z + c(1, 2)
+## Operaciones sencillas con vectores
 
-z + c(1, 2, 3, 4, 5, 6, 7)
+  x <- 1:5
+  x + 1
 
-## Indexado numérico de vectores
+  x^2
 
-  x <- seq(1, 100, 2)
-  x[c(1, 2, 3, 4, 5)]
+  y <- 1:10
+  x + y
 
-  x[1:5]
+  x * y
 
-  x[10:5]
-
-## Indexado de vectores con condiciones lógicas
-
-  condicion <- (x>30)
-  condicion
-
-  class(condicion)
-
-## Indexado de vectores con condiciones lógicas
-
-  x == 37
-
-  x[x == 37]
-
-  x[x != 9]
-
-  x[x > 20]
-
-## Indexado de vectores con =%in%=
-
-y <- seq(101, 200, 2)
-y %in% c(101, 127, 141)
-
-y[y %in% c(101, 127, 141)]
-
-## Indexado de vectores con condiciones múltiples
-
-z <- c(x, y)
-
-z[z < 30 | z > 150]
-
-z[z >= 30 & z <= 150]
-
-## Indexado de vectores con condiciones múltiples
-
-cond  <-  (x>10) & (x<50)
-cond
-
-cond  <-  (x>=10) & (x<=50)
-cond
-
-x[cond]
-
-## Con las condiciones se pueden hacer operaciones
-
-sum(cond)
-
-!cond
-
-sum(!cond)
-
-as.numeric(cond)
-
-## Funciones predefinidas
-
-summary(x)
-mean(x)
-sd(x)
-median(x)
-max(x)
-min(x)
-range(x)
-quantile(x)
+  x^2 + y^3
 
 ## Construir una matriz
 
@@ -165,111 +81,20 @@ M
 M <- rbind(x, y, z)
 M
 
-## Transponer una matriz
-
-t(M)
-
-dim(t(M))
-
-## Indexado de matrices
-
-M[]
-
-M[1, ]
-
-M[, 1]
-
-## Indexado de matrices
-
-M[1:2, ]
-
-M[1:2, 2:3]
-
-M[1, c(1, 4)]
-
-## Indexado de matrices
-
-M[-1,]
-
-M[-c(1, 2),]
-
-## Operaciones con matrices
-
-M * M
-
-M ^ 2
-
-M %*% M
-
-M %*% t(M)
-
-## Operaciones con matrices: funciones predefinidas
-
-sum(M)
-
-rowSums(M)
-
-colSums(M)
-
-rowMeans(M)
-
-colMeans(M)
-
-## La función =apply=
-
-apply(M, 1, sum)
-
-apply(M, 2, sum)
-
-apply(M, 1, mean)
-
-apply(M, 2, mean)
-
-apply(M, 1, sd, na.rm=TRUE)
-
-apply(M, 2, sd)
-
 ## Para crear una lista usamos la función =list=
 
-  lista <- list(a=c(1,3,5),
-                b=c('l', 'p', 'r', 's'),
-                c=3)
-
-## Podemos acceder a los elementos...
-## - Por su nombre
-
+lista <- list(a=c(1,3,5),
+              b=c('l', 'p', 'r', 's'),
+              c=3)
 lista
 
-lista$a
+class(lista)
 
-lista$b
-
-lista$c
-
-## Podemos acceder a los elementos...
-## - o por su índice
-
-  lista[1]
-
-  lista[[1]]
-
-  
-  class(lista[1])
-
-  class(lista[[1]])
-
-## Para matrices =apply=, para listas =lapply= y =sapply=
-
-lista <- list(x = 1:10,
-              y = seq(0, 10, 2),
-              z = rnorm(30))
-lapply(lista, sum)
-
-sapply(lista, sum)
+length(lista)
 
 ## Para crear un =data.frame=...
 
-  df <- data.frame(x = 1:10,
+  df <- data.frame(x = 1:5,
                    y = rnorm(10),
                    z = 0)
   df
@@ -278,49 +103,16 @@ sapply(lista, sum)
 
   dim(df)
 
-## Podemos acceder a los elementos
-## - Por su nombre
-
-df$x
-
-df$y
-
-df$z
-
-## - Por su índice
-
-df[1,]
-
-df[,1]
-
-## La regla del reciclaje
-
-  year <- 2011
-  month <- 1:12
-  class <- c('A', 'B', 'C')
-  vals <- rnorm(12)
-  
-  dats <- data.frame(year, month, class, vals)
-  dats
-
-## La función =expand.grid=
-
-  x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(x = x, y = y)
-  head(df)
-
-  tail(df)
-
-  summary(df)
-
 ## Para definir una función usamos la función =function=
 
-  myFun <- function(x, y) x + y
-  myFun(3, 4)
+myFun <- function(x, y) x + y
+myFun
 
   class(myFun)
 
-## Definir una función a partir de funciones
+  myFun(3, 4)
+
+## Podemos construir a partir de funciones
 
 foo  <-  function(x, ...){
   mx <- mean(x, ...)
@@ -339,11 +131,91 @@ foo(1:10)
 
 foo(rnorm(1e5))
 
-## Y también funciona con matrices
+## Indexado numérico
 
-rowMeans(M)
+  x <- seq(1, 100, 2)
+  x
 
-apply(M, 1, foo)
+  x[1:5]
+
+  x[10:5]
+
+## Indexado con condiciones lógicas
+
+  x == 37
+
+  x[x == 37]
+
+  x[x != 9]
+
+  x[x > 20]
+
+## Indexado con condiciones múltiples
+
+z <- seq(-10, 10, by = .5)
+z
+
+z[z < -5 | z > 5]
+
+cond <- (z >= 0 & z <= 5)
+cond
+
+z[cond]
+
+## Indexado de matrices
+
+M[1:2, ]
+
+M[1:2, 2:3]
+
+M[1, c(1, 4)]
+
+## Indexado de matrices
+
+M[-1,]
+
+M[-c(1, 2),]
+
+## Podemos acceder a los elementos...
+## - Por su nombre
+
+lista$a
+
+## - o por su índice
+
+  lista[1]
+
+  lista[[1]]
+
+## Podemos acceder a los elementos
+## - Por su nombre (como una lista)
+
+df$x
+
+## - Por su índice (como una matriz)
+
+df[1,]
+
+df[,1]
+
+## La función =apply=
+
+apply(M, 1, sum)
+
+rowSums(M)
+
+apply(M, 2, mean)
+
+colMeans(M)
+
+## =lapply= y =sapply=
+
+lista <- list(x = 1:10,
+              y = seq(0, 10, 2),
+              z = rnorm(30))
+lapply(lista, sum)
+
+sapply(lista, sum)
 
 ## =setwd=, =getwd=, =dir=
 
@@ -357,20 +229,14 @@ apply(M, 1, foo)
 
 ## Lectura de datos con =read.table=
 
-  dats <- read.table('data/aranjuez.csv')
-  head(dats)
-
-## Lectura de datos con =read.table=
-
   
   dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
   head(dats)
 
 ## Lectura de datos con =read.table=
 
-  
-  aranjuez <- read.csv('data/aranjuez.csv')
-  head(aranjuez)
+aranjuez <- read.csv('data/aranjuez.csv')
+head(aranjuez)
 
   class(aranjuez)
 
@@ -396,21 +262,25 @@ head(aranjuez[idx, ])
 
 subset(aranjuez,
        subset = (Radiation > 20 & TempAvg < 10),
-       select = c(Radiation, TempAvg, TempMax, TempMin))
+       select = c(Radiation, TempAvg,
+           TempMax, TempMin))
 
 ## =aggregate=
 
 aranjuez$rainy <- aranjuez$Rain > 0
 
-aggregate(Radiation ~ rainy, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ rainy, data = aranjuez,
+          FUN = mean)
 
 ## Variable categórica con =cut=
 
 aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
 
-aggregate(Radiation ~ tempClass, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ tempClass, data = aranjuez,
+          FUN = mean)
 
-aggregate(Radiation ~ tempClass + rainy, data = aranjuez, FUN = mean)
+aggregate(Radiation ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
 
 ## Fechas
 ## - =as.Date=
@@ -431,13 +301,33 @@ aranjuez$quarter <- quarters(aranjuez$date)
 
 ## Agregamos con fechas
 
-  aggregate(Radiation ~ year, data = aranjuez, FUN=mean)
+aggregate(Radiation ~ year, data = aranjuez,
+          FUN=mean)
 
-  aggregate(Radiation ~ month + year, data = aranjuez, FUN=mean)
+aggregate(Radiation ~ month + year,
+          data = aranjuez, FUN=mean)
 
-aggregate(cbind(Radiation, TempAvg) ~ year, data = aranjuez, FUN = mean)
+## Agregamos varias variables con fechas
 
-aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
+aggregate(cbind(Radiation, TempAvg) ~ month + year,
+          data = aranjuez, FUN = mean)
+
+## =lm=: Regresión simple
+
+radTemp <- lm(Radiation ~ TempAvg, data = aranjuez)
+summary(radTemp)
+
+## =lm=: Regresión multiple
+
+radTempHumid <- lm(Radiation ~ TempAvg * HumidAvg,
+                   data = aranjuez)
+summary(radTempHumid)
+
+## =lm=: Regresión multiple
+
+radTempRain <- lm(Radiation ~ TempAvg * rainy,
+                  data = aranjuez)
+summary(radTempRain)
 
 ## Lattice
 
@@ -449,6 +339,49 @@ aggregate(cbind(Radiation, TempAvg) ~ month + year, data = aranjuez, FUN = mean)
 
 pdf(file="figs/xyplot.pdf")
   xyplot(Radiation ~ TempAvg, data=aranjuez)
+dev.off()
+
+## Paneles
+
+pdf(file="figs/xyplotYear.pdf")
+  xyplot(Radiation ~ TempAvg|factor(year),
+         data=aranjuez)
+dev.off()
+
+## Grupos
+
+pdf(file="figs/xyplotQuarter.pdf")
+  xyplot(Radiation ~ TempAvg, groups=quarter,
+         data=aranjuez, auto.key=list(space='right'))
+dev.off()
+
+## Matriz de gráficos de dispersión
+
+png(filename="figs/splom.png")
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+dev.off()
+
+## Box-and-Whiskers
+
+pdf(file="figs/bwplot.pdf")
+  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=FALSE, pch='|')
+dev.off()
+
+## Histogramas
+
+pdf(file="figs/histogram.pdf")
+  histogram(~ Radiation|factor(year), data=aranjuez)
+dev.off()
+
+## Gráficos de densidad
+
+pdf(file="figs/density.pdf")
+densityplot(~ Radiation, groups=quarter,
+            data=aranjuez,
+            auto.key=list(space='right'))
 dev.off()
 
 ## Añadimos regresión lineal
@@ -466,20 +399,6 @@ pdf(file="figs/xyplotSmooth.pdf")
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          type=c('p', 'smooth'), grid = TRUE,
          lwd=2, col.line='black')
-dev.off()
-
-## Paneles
-
-pdf(file="figs/xyplotYear.pdf")
-  xyplot(Radiation ~ TempAvg|factor(year),
-         data=aranjuez)
-dev.off()
-
-## Grupos
-
-pdf(file="figs/xyplotQuarter.pdf")
-  xyplot(Radiation ~ TempAvg, groups=quarter,
-         data=aranjuez, auto.key=list(space='right'))
 dev.off()
 
 ## Colores y tamaños
@@ -528,43 +447,4 @@ xyplot(Radiation ~ TempAvg,
        par.settings=myTheme,
        auto.key=list(space='right'),
        data=aranjuez)
-dev.off()
-
-## Matriz de gráficos de dispersión
-
-png(filename="figs/splom.png")
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
-dev.off()
-
-## Matriz de gráficos de dispersión
-
-png(filename="figs/splomGroup.png")
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        groups=aranjuez$quarter,
-        auto.key=list(space='right'),
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
-dev.off()
-
-## Box-and-Whiskers
-
-pdf(file="figs/bwplot.pdf")
-  bwplot(Radiation ~ month, data=aranjuez,
-         horizontal=FALSE, pch='|')
-dev.off()
-
-## Histogramas
-
-pdf(file="figs/histogram.pdf")
-  histogram(~ Radiation|factor(year), data=aranjuez)
-dev.off()
-
-## Gráficos de densidad
-
-pdf(file="figs/density.pdf")
-densityplot(~ Radiation, groups=quarter,
-            data=aranjuez,
-            auto.key=list(space='right'))
 dev.off()
